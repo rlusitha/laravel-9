@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Image;
 
 class PrescriptionController extends Controller
 {
@@ -15,7 +17,21 @@ class PrescriptionController extends Controller
      */
     public function index()
     {
-        //
+        $current_user_id = Auth::id();
+
+        $prescriptions = DB::table('prescriptions')
+            ->join('users', 'users.id', '=', 'prescriptions.user_id')
+            ->where('prescriptions.user_id', '=', $current_user_id)
+            ->get();
+
+        foreach ($prescriptions as $prescription) {
+            $path = $prescription->path;
+        }   
+        $contents = Storage::get($path);
+        $img = Image::make($contents)->resize(700, 750);
+        dd($img);
+
+        return view('prescription.viewPrescriptions', ['prescriptions' => $prescriptions]);
     }
 
     /**
@@ -36,9 +52,11 @@ class PrescriptionController extends Controller
      */
     public function store(Request $request)
     {
+        $increment_for_file_name = 0;
+
         //Validation
         $validated = $request->validate([
-            'prescriptionImg' => 'required|mimes:jpg,jpeg,png',
+            'prescription_name' => 'required|string|max:255',
             'note' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'deliveryTime' => 'required',
@@ -46,6 +64,7 @@ class PrescriptionController extends Controller
         ]);
 
         //Storing the user inputs to variables
+        $prescription_name = $request->input('prescription_name');
         $note = $request->input('note');
         $address = $request->input('address');
         $deliveryTime = $request->input('deliveryTime');
@@ -53,13 +72,15 @@ class PrescriptionController extends Controller
 
         //Inserting the data to database
         foreach ($request->file('prescriptionImg') as $uploadedFiles) {
-            $path = $uploadedFiles->store('prescriptions');
+            $path = $uploadedFiles->store('public');
 
             DB::table('prescriptions')->insert([
+                'prescription_name' => $prescription_name,
                 'path' => $path,
                 'note' => $note,
                 'address' => $address,
                 'deliveryTime' => $deliveryTime,
+                'date' => date('Y-m-d'),
                 'user_id' => $user_id,
                 'created_at' => \Carbon\Carbon::now(),
             ]);
