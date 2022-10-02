@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Image;
+use Intervention\Image\Facades\Image;
+// use Image;
 
 class PrescriptionController extends Controller
 {
@@ -26,10 +27,14 @@ class PrescriptionController extends Controller
 
         foreach ($prescriptions as $prescription) {
             $path = $prescription->path;
-        }   
-        $contents = Storage::get($path);
-        $img = Image::make($contents)->resize(700, 750);
-        dd($img);
+            // dd($path);
+            $contents = Storage::get($path);
+            $img = Image::make($contents)->resize(700, 750);
+            $img->save($path);
+            // $img = Image::make($path)->resize(700, 750);
+            // dd($img);
+        }
+        // $contents = Storage::get($path);
 
         return view('prescription.viewPrescriptions', ['prescriptions' => $prescriptions]);
     }
