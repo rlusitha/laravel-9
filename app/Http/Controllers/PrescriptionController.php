@@ -30,7 +30,7 @@ class PrescriptionController extends Controller
             // dd($path);
             $contents = Storage::get($path);
             $img = Image::make($contents)->resize(700, 750);
-            $img->save($path);
+            $img->save('prescription.jpg');
             // $img = Image::make($path)->resize(700, 750);
             // dd($img);
         }

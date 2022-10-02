@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PrescriptionController;
+use App\Http\Controllers\QuotationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::view('/welcome1', 'welcome1');
 Route::view('/getQuotation', 'quotation');
 Route::resource('prescription', PrescriptionController::class);
+Route::resource('quotation', QuotationController::class);

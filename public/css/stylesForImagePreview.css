@@ -1,0 +1,888 @@
+/*************Bikini IMG Section on Product Page **********/
+
+#bikini-display2, #bikini-display3, #bikini-display4 {
+    display: none;
+    position: relative;
+    height: 409px;
+  }
+  
+  @media (max-width: 1275px) {
+    #bikini-display2, #bikini-display3, #bikini-display4  {
+      display: none;
+      position: relative;
+      height: 375px;
+    }
+  }
+  
+  @media (max-width: 1150px) {
+    #bikini-display2, #bikini-display3, #bikini-display4  {
+      display: none;
+      position: relative;
+      height: 325px;
+    }
+  }
+  
+  #bikini-display1 {
+    position: relative;
+    height: 409px;
+  }
+  
+  @media (max-width: 1275px) {
+    #bikini-display1  {
+      position: relative;
+      height: 375px;
+    }
+  }
+  
+  @media (max-width: 1150px) {
+    #bikini-display1  {
+      position: relative;
+      height: 325px;
+    }
+  }
+  
+  .bikini-product-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    background-color: white;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    height: 1000px;
+  }
+  
+  .bikini-grid1 img {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
+  }
+  
+  .bikini-grid1 {
+    grid-column-start: 0;
+    grid-column-end: 0;
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    padding-left: 10px;
+  
+  }
+  
+  .bikini-img-container {
+    margin: auto;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .bikini-thumbnail {
+    padding-top: 3px;
+    padding-left: 3px;
+    min-width: 494px;
+  }
+  
+  .bikini-thumbnail img {
+    height: 100px;
+  }
+  
+  @media (max-width: 1275px) {
+    .bikini-thumbnail img  {
+      height: 91.68px;
+    }
+  }
+  
+  @media (max-width: 1150px) {
+    .bikini-thumbnail img  {
+      height: 79.456px;
+    }
+  }
+  
+  .bikini-thumbnail img:hover {
+    opacity:0.7;
+    -moz-transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    transform: scale(1.02);
+    cursor: pointer;
+  
+  }
+  
+  
+  .thumbnail-clicked {
+    border: 3px solid black;
+  }
+  
+  
+  /**********COLORS***************/
+  
+  .price {
+    padding-bottom: 50px;
+  }
+  
+  /**********COLORS***************/
+  
+  .colors {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-bottom:15px;
+    max-width: 400px;
+    padding-top: 20px;
+  }
+  
+  .colors > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 5px 5px;
+  }
+  
+  colors img:active {
+    border: 2px solid black;
+  }
+  
+  .color-item1 {
+    position: relative;
+  }
+  
+  .color-item1:hover {
+    z-index: 10;
+  }
+  
+  
+  
+  .color-item1 img {
+    /* max-width: 100%; */
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    
+  
+  }
+  
+  .color-item1:hover img {
+    -moz-transform: scale(2);
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    cursor: pointer;
+  }
+  
+  
+  
+  
+    .img1 {
+    opacity: 1;
+    /* display: block; */
+    /* width: 100%; */
+    /* height: auto; */
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+  
+  
+    .color-item1:hover .fabric-name1 {
+      opacity: 1;
+      -moz-transition: all 0.7s;
+      -webkit-transition: all 0.7s;
+      transition: all 0.7s;
+      cursor: pointer;
+      overflow: visible;
+      z-index: 9;
+  }
+  
+    .fabric-name1 {
+      transition: .5s ease;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    
+    .fn1 {
+      color: black;
+      font-size: 18px;
+     
+  }
+  
+  /****************/
+  
+  .color-item2 {
+    position: relative;
+  }
+  
+  .color-item2:hover {
+    z-index: 10;
+  }
+  
+  .color-item2 img {
+    /* max-width: 100%; */
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  
+  .color-item2:hover img {
+    -moz-transform: scale(2);
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    cursor: pointer;
+    z-index: 10;
+  }
+  
+    .img2 {
+    opacity: 1;
+    /* display: block; */
+    /* width: 100%; */
+    /* height: auto; */
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+  
+    .color-item2:hover .fabric-name2 {
+      opacity: 1;
+      -moz-transition: all 0.7s;
+      -webkit-transition: all 0.7s;
+      transition: all 0.7s;
+      cursor: pointer;
+      z-index: 9;
+  }
+  
+    .fabric-name2 {
+      transition: .5s ease;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    
+    .fn2 {
+      color: black;
+      font-size: 18px;  
+  }
+  
+  /****************/
+  
+  .color-item3 {
+    position: relative;
+  }
+  
+  .color-item3:hover {
+    z-index: 10;
+  }
+  
+  .color-item3 img {
+    /* max-width: 100%; */
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  
+  .color-item3:hover img {
+    -moz-transform: scale(2);
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    cursor: pointer;
+  }
+  
+    .img3 {
+    opacity: 1;
+    /* display: block; */
+    /* width: 100%; */
+    /* height: auto; */
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+  
+    .color-item3:hover .fabric-name3 {
+      opacity: 1;
+      -moz-transition: all 0.7s;
+      -webkit-transition: all 0.7s;
+      transition: all 0.7s;
+      cursor: pointer;
+      z-index: 9;
+  }
+  
+    .fabric-name3 {
+      transition: .5s ease;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    
+    .fn3 {
+      color: black;
+      font-size: 18px;  
+  }
+  
+  /****************/
+  
+  
+  .color-item4 {
+    position: relative;
+  }
+  
+  .color-item4:hover {
+    z-index: 10;
+  }
+  
+  .color-item4 img {
+    /* max-width: 100%; */
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  
+  .color-item4:hover img {
+    -moz-transform: scale(2);
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    cursor: pointer;
+  }
+  
+    .img4 {
+    opacity: 1;
+    /* display: block; */
+    /* width: 100%; */
+    /* height: auto; */
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+  
+    .color-item4:hover .fabric-name4 {
+      opacity: 1;
+      -moz-transition: all 0.7s;
+      -webkit-transition: all 0.7s;
+      transition: all 0.7s;
+      cursor: pointer;
+      z-index: 9;
+  }
+  
+    .fabric-name4 {
+      transition: .5s ease;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    
+    .fn4 {
+      color: black;
+      font-size: 18px;  
+  }
+  
+  /****************/
+  
+  
+  .color-item5 {
+    position: relative;
+  }
+  
+  .color-item5:hover {
+    z-index: 10;
+  }
+  
+  .color-item5 img {
+    /* max-width: 100%; */
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  
+  .color-item5:hover img {
+    -moz-transform: scale(2);
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    cursor: pointer;
+  }
+  
+    .img5 {
+    opacity: 1;
+    /* display: block; */
+    /* width: 100%; */
+    /* height: auto; */
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+  
+    .color-item5:hover .fabric-name5 {
+      opacity: 1;
+      -moz-transition: all 0.7s;
+      -webkit-transition: all 0.7s;
+      transition: all 0.7s;
+      cursor: pointer;
+      z-index: 9;
+  }
+  
+    .fabric-name5 {
+      transition: .5s ease;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    
+    .fn5 {
+      color: black;
+      font-size: 18px;  
+  }
+  
+  /****************/
+  
+  .color-item6 {
+    position: relative;
+  }
+  
+  .color-item6:hover {
+    z-index: 10;
+  }
+  
+  .color-item6 img {
+    /* max-width: 100%; */
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  
+  .color-item6:hover img {
+    -moz-transform: scale(2);
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    cursor: pointer;
+  }
+  
+    .img6 {
+    opacity: 1;
+    /* display: block; */
+    /* width: 100%; */
+    /* height: auto; */
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+  
+    .color-item6:hover .fabric-name6 {
+      opacity: 1;
+      -moz-transition: all 0.7s;
+      -webkit-transition: all 0.7s;
+      transition: all 0.7s;
+      cursor: pointer;
+      z-index: 9;
+  }
+  
+    .fabric-name6 {
+      transition: .5s ease;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    
+    .fn6 {
+      color: black;
+      font-size: 18px;  
+  }
+  
+  /****************/
+  
+  .color-item7 {
+    position: relative;
+  }
+  
+  .color-item7:hover {
+    z-index: 10;
+  }
+  
+  .color-item7 img {
+    /* max-width: 100%; */
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  
+  .color-item7:hover img {
+    -moz-transform: scale(2);
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    cursor: pointer;
+  }
+  
+    .img7 {
+    opacity: 1;
+    /* display: block; */
+    /* width: 100%; */
+    /* height: auto; */
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+  
+    .color-item7:hover .fabric-name7 {
+      opacity: 1;
+      -moz-transition: all 0.7s;
+      -webkit-transition: all 0.7s;
+      transition: all 0.7s;
+      cursor: pointer;
+      z-index: 9;
+  }
+  
+    .fabric-name7 {
+      transition: .5s ease;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    
+    .fn7 {
+      color: black;
+      font-size: 18px;  
+  }
+  
+  /****************/
+  
+  .color-item8 {
+    position: relative;
+  }
+  
+  .color-item8:hover {
+    z-index: 10;
+  }
+  
+  .color-item8 img {
+    /* max-width: 100%; */
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  
+  .color-item8:hover img {
+    -moz-transform: scale(2);
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    cursor: pointer;
+  }
+  
+    .img8 {
+    opacity: 1;
+    /* display: block; */
+    /* width: 100%; */
+    /* height: auto; */
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+  
+    .color-item8:hover .fabric-name8 {
+      opacity: 1;
+      -moz-transition: all 0.7s;
+      -webkit-transition: all 0.7s;
+      transition: all 0.7s;
+      cursor: pointer;
+      z-index: 9;
+  }
+  
+    .fabric-name8 {
+      transition: .5s ease;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    
+    .fn8 {
+      color: black;
+      font-size: 18px;  
+  }
+  
+  /****************/
+  
+  .color-item9 {
+    position: relative;
+  }
+  
+  .color-item9:hover {
+    z-index: 10;
+  }
+  
+  .color-item9 img {
+    /* max-width: 100%; */
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  
+  .color-item9:hover img {
+    -moz-transform: scale(2);
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    cursor: pointer;
+  }
+  
+    .img9 {
+    opacity: 1;
+    /* display: block; */
+    /* width: 100%; */
+    /* height: auto; */
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+  
+    .color-item9:hover .fabric-name9 {
+      opacity: 1;
+      -moz-transition: all 0.7s;
+      -webkit-transition: all 0.7s;
+      transition: all 0.7s;
+      cursor: pointer;
+      z-index: 9;
+  }
+  
+    .fabric-name9 {
+      transition: .5s ease;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    
+    .fn9 {
+      color: black;
+      font-size: 18px;  
+  }
+  
+  /****************/
+  
+  .color-item10 {
+    position: relative;
+  }
+  
+  .color-item10:hover {
+    z-index: 10;
+  }
+  
+  .color-item10 img {
+    /* max-width: 100%; */
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  
+  .color-item10:hover img {
+    -moz-transform: scale(2);
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    cursor: pointer;
+  }
+  
+    .img10 {
+    opacity: 1;
+    /* display: block; */
+    /* width: 100%; */
+    /* height: auto; */
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+  
+    .color-item10:hover .fabric-name10 {
+      opacity: 1;
+      -moz-transition: all 0.7s;
+      -webkit-transition: all 0.7s;
+      transition: all 0.7s;
+      cursor: pointer;
+      z-index: 9;
+  }
+  
+    .fabric-name10 {
+      transition: .5s ease;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    
+    .fn10 {
+      color: black;
+      font-size: 18px;  
+  }
+  
+  /****************/
+  
+  .color-item11 {
+    position: relative;
+  }
+  
+  .color-item11:hover {
+    z-index: 10;
+  }
+  
+  .color-item11 img {
+    /* max-width: 100%; */
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  
+  .color-item11:hover img {
+    -moz-transform: scale(2);
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    cursor: pointer;
+  }
+  
+    .img11 {
+    opacity: 1;
+    /* display: block; */
+    /* width: 100%; */
+    /* height: auto; */
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+  
+    .color-item11:hover .fabric-name11 {
+      opacity: 1;
+      -moz-transition: all 0.7s;
+      -webkit-transition: all 0.7s;
+      transition: all 0.7s;
+      cursor: pointer;
+      z-index: 9;
+  }
+  
+    .fabric-name11 {
+      transition: .5s ease;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    
+    .fn11 {
+      color: black;
+      font-size: 18px;  
+  }
+  
+  /****************/
+  
+  .color-item12 {
+    position: relative;
+  }
+  
+  .color-item12:hover {
+    z-index: 10;
+  }
+  
+  .color-item12 img {
+    /* max-width: 100%; */
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  
+  .color-item12:hover img {
+    -moz-transform: scale(2);
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    cursor: pointer;
+  }
+  
+    .img12 {
+    opacity: 1;
+    /* display: block; */
+    /* width: 100%; */
+    /* height: auto; */
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+  
+    .color-item12:hover .fabric-name12 {
+      opacity: 1;
+      -moz-transition: all 0.7s;
+      -webkit-transition: all 0.7s;
+      transition: all 0.7s;
+      cursor: pointer;
+      z-index: 9;
+  }
+  
+    .fabric-name12 {
+      transition: .5s ease;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    
+    .fn12 {
+      color: black;
+      font-size: 18px;  
+  }
+  
+  /****************/
+  
+  
+  /********* SIZES **********/
+  
+  
+  
+  hr {
+      display: block;
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+      margin-left: auto;
+      margin-right: 25px;
+      border-style: inset;
+      border-width: 1px;
+  }
+  
+  .sizes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-bottom: 15px;
+    padding-top: 20px;
+  }
+  
+  .sizes > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 5px 5px;
+  }
+  
+  .size-1 {
+    border: 2px solid black;
+    border-radius: 5px;
+    border-style: ridge;
+    border-width: 1px;
+    font-size: 15px;
+    padding: 10px;
+    position: relative;
+    margin: 5px;
+    width: 40px;
+    text-align: center;
+  }
