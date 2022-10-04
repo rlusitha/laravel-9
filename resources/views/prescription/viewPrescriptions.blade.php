@@ -335,6 +335,7 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
+                                        <th>ID</th>
                                         <th>Name</th>
                                         <th>Date</th>
                                         <th>View Prescription</th>
@@ -344,6 +345,7 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
+                                        <th>ID</th>
                                         <th>Name</th>
                                         <th>Date</th>
                                         <th>View Prescription</th>
@@ -353,7 +355,11 @@
                                 </tfoot>
                                 <tbody>
                                     @foreach($prescriptions as $prescription)
+                                    @php
+                                        $prescription_name = $prescription->prescription_name;
+                                    @endphp
                                     <tr>
+                                        <td>{{ $prescription->id }}</td>
                                         <td>{{ $prescription->prescription_name }}</td>
                                         <td>{{ $prescription->date }}</td>
                                         <td><a href="" target="_blank" data-toggle="modal" data-target="#prescriptionModal">View Prescription</a></td>
@@ -372,15 +378,13 @@
 
                                 <!-- Modal Header -->
                                 <div class="modal-header">
-                                    @foreach($prescriptions as $prescription)
-                                    <h4 class="modal-title">{{ $prescription->prescription_name }}</h4>
-                                    @endforeach
+                                    <h4 class="modal-title">{{ $prescription_name }}</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                    <img style="display: block; margin-left: auto; margin-right: auto;" src="<?php echo asset("prescription_gamage.jpg") ?>" alt="prescription">
+                                    <img style="display: block; margin-left: auto; margin-right: auto;" src="<?php echo asset("ClwASTegImcvyB74NIOEitJ6BihYUn0OPZQscYSz.jpg") ?>" alt="prescription">
                                 </div>
 
                                 <!-- Modal footer -->

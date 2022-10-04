@@ -20,21 +20,18 @@ class PrescriptionController extends Controller
     {
         $current_user_id = Auth::id();
 
-        $prescriptions = DB::table('prescriptions')
-            ->join('users', 'users.id', '=', 'prescriptions.user_id')
+        $prescriptions = DB::table('prescriptions') 
+            ->select('id', 'path', 'file_name', 'prescription_name', 'date', 'user_id')
             ->where('prescriptions.user_id', '=', $current_user_id)
             ->get();
 
         foreach ($prescriptions as $prescription) {
+            $file_name = $prescription->file_name;
             $path = $prescription->path;
-            // dd($path);
             $contents = Storage::get($path);
             $img = Image::make($contents)->resize(700, 750);
-            $img->save('prescription.jpg');
-            // $img = Image::make($path)->resize(700, 750);
-            // dd($img);
+            $img->save($file_name);
         }
-        // $contents = Storage::get($path);
 
         return view('prescription.viewPrescriptions', ['prescriptions' => $prescriptions]);
     }
@@ -57,8 +54,6 @@ class PrescriptionController extends Controller
      */
     public function store(Request $request)
     {
-        $increment_for_file_name = 0;
-
         //Validation
         $validated = $request->validate([
             'prescription_name' => 'required|string|max:255',
@@ -78,10 +73,12 @@ class PrescriptionController extends Controller
         //Inserting the data to database
         foreach ($request->file('prescriptionImg') as $uploadedFiles) {
             $path = $uploadedFiles->store('public');
+            $file_name = basename($path);
 
             DB::table('prescriptions')->insert([
                 'prescription_name' => $prescription_name,
                 'path' => $path,
+                'file_name' => $file_name,
                 'note' => $note,
                 'address' => $address,
                 'deliveryTime' => $deliveryTime,
