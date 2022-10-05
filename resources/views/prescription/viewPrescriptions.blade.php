@@ -332,7 +332,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered prescriptionTable" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -359,7 +359,7 @@
                                         <td>{{ $prescription->id }}</td>
                                         <td>{{ $prescription->prescription_name }}</td>
                                         <td>{{ $prescription->date }}</td>
-                                        <td><a href="/prescription/{{ $prescription->id }}" target="_blank" data-toggle="modal" data-target="#prescriptionModal">View Prescription</a></td>
+                                        <td><a href="" class="viewImg" target="_blank" data-toggle="modal" data-target="#prescriptionModal" data-id ="{{ $prescription->id }}">View Prescription</a></td>
                                         <td><a href="" target="_blank" data-toggle="modal" data-target="#quotationModal">View Quotation</a></td>
                                         <td><button class="btn btn-success mr-3">Accept</button><button class="btn btn-danger">Reject</button></td>
                                     </tr>
@@ -375,13 +375,13 @@
 
                                 <!-- Modal Header -->
                                 <div class="modal-header">
-                                    <h4 class="modal-title">{{$prescription_name}}</h4>
+                                    <h4 id="modal-title" class="modal-title"></h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                    <img style="display: block; margin-left: auto; margin-right: auto;" src="<?php echo asset('{{$prescription_img}}') ?>" alt="prescription">
+                                    <img id="imgPres" style="display: block; margin-left: auto; margin-right: auto;" src="" alt="prescription">
                                 </div>
 
                                 <!-- Modal footer -->
@@ -443,3 +443,36 @@
 </div>
 <!-- End of Page Wrapper -->
 @endsection
+<!-- Script -->
+<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+
+<script type='text/javascript'>
+    $(document).ready(function() {
+
+        $('.prescriptionTable').on('click', '.viewImg', function(e) {
+            e.preventDefault();
+
+            var prescriptionID = $(this).attr('data-id');
+
+            if (prescriptionID > 0) {
+
+                // AJAX request
+                var url = "{{ route('prescription.show',[':prescriptionID']) }}";
+                url = url.replace(':prescriptionID', prescriptionID);
+
+                $.ajax({
+                    url: url,
+                    dataType: 'json',
+                    success: function(response) {
+                        //Change the title of the modal header
+                        $('#modal-title').text(response.prescription_name[0].prescription_name);
+
+                        //Change the prescription image
+                        $('#imgPres').attr("src", response.prescription_img[0].file_name);
+                    }
+                });
+            }
+        });
+
+    });
+</script>

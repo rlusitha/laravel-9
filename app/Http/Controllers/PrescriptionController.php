@@ -111,7 +111,11 @@ class PrescriptionController extends Controller
         ->where('prescriptions.user_id', '=', $current_user_id)
         ->get();
 
-        return view('prescription.viewPrescriptions', ['prescription_img' => $prescription_img, 'prescription_name' => $prescription_name]);
+        // return view('prescription.viewPrescriptions', ['prescription_img' => $prescription_img, 'prescription_name' => $prescription_name]);
+        return response()->json([
+            'prescription_img' => $prescription_img,
+            'prescription_name' => $prescription_name,
+        ]);
     }
 
     /**
