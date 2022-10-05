@@ -97,7 +97,21 @@ class PrescriptionController extends Controller
      */
     public function show($id)
     {
-        //
+        $current_user_id = Auth::id();
+
+        $prescription_img = DB::table('prescriptions') 
+        ->select('file_name')
+        ->where('prescriptions.id', '=', $id)
+        ->where('prescriptions.user_id', '=', $current_user_id)
+        ->get();
+
+        $prescription_name = DB::table('prescriptions') 
+        ->select('prescription_name')
+        ->where('prescriptions.id', '=', $id)
+        ->where('prescriptions.user_id', '=', $current_user_id)
+        ->get();
+
+        return view('prescription.viewPrescriptions', ['prescription_img' => $prescription_img, 'prescription_name' => $prescription_name]);
     }
 
     /**

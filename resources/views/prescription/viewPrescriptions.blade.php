@@ -355,14 +355,11 @@
                                 </tfoot>
                                 <tbody>
                                     @foreach($prescriptions as $prescription)
-                                    @php
-                                        $prescription_name = $prescription->prescription_name;
-                                    @endphp
                                     <tr>
                                         <td>{{ $prescription->id }}</td>
                                         <td>{{ $prescription->prescription_name }}</td>
                                         <td>{{ $prescription->date }}</td>
-                                        <td><a href="" target="_blank" data-toggle="modal" data-target="#prescriptionModal">View Prescription</a></td>
+                                        <td><a href="/prescription/{{ $prescription->id }}" target="_blank" data-toggle="modal" data-target="#prescriptionModal">View Prescription</a></td>
                                         <td><a href="" target="_blank" data-toggle="modal" data-target="#quotationModal">View Quotation</a></td>
                                         <td><button class="btn btn-success mr-3">Accept</button><button class="btn btn-danger">Reject</button></td>
                                     </tr>
@@ -378,13 +375,13 @@
 
                                 <!-- Modal Header -->
                                 <div class="modal-header">
-                                    <h4 class="modal-title">{{ $prescription_name }}</h4>
+                                    <h4 class="modal-title">{{$prescription_name}}</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                    <img style="display: block; margin-left: auto; margin-right: auto;" src="<?php echo asset("ClwASTegImcvyB74NIOEitJ6BihYUn0OPZQscYSz.jpg") ?>" alt="prescription">
+                                    <img style="display: block; margin-left: auto; margin-right: auto;" src="<?php echo asset('{{$prescription_img}}') ?>" alt="prescription">
                                 </div>
 
                                 <!-- Modal footer -->
