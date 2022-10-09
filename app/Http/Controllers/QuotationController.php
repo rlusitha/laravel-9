@@ -39,6 +39,8 @@ class QuotationController extends Controller
     {
         $i = 0;
         $user_id = $request->user()->id;
+        $prescription_id = $request->prescription_id;
+
         foreach ($request['TableData'] as $result) {
             $drug[] = $result['drug'];
             $unit_price[] = $result['unit_price'];
@@ -54,7 +56,7 @@ class QuotationController extends Controller
                 'unit_price' => $unit_price[$j],
                 'quantity' => $quantity[$j],
                 'amount' => $amount[$j],
-                // 'prescription_id' => 1,
+                'prescription_id' => $prescription_id,
                 'user_id' => $user_id,
                 'created_at' => \Carbon\Carbon::now(),
             ]);
@@ -120,16 +122,20 @@ class QuotationController extends Controller
     {
         $prescriptions = DB::table('prescriptions')
             ->select('id', 'prescription_name', 'file_name', 'date', 'note', 'address', 'deliveryTime')
-            // ->where('prescriptions.user_id', '=', $current_user_id)
             ->get();
 
-        // foreach ($prescriptions as $prescription) {
-        //     $id = $prescription->id;
-        //     $prescription_name = $prescription->prescription_name;
-        //     $file_name = $prescription->file_name;
-        //     $date = $prescription->date;
-        // }
-
         return view('quotation.viewPrescriptions', ['prescriptions' => $prescriptions]);
+    }
+
+    public function create_quotation_view(Request $request)
+    {
+        $prescription_id = $request->prescription_id;
+
+        $file_name = DB::table('prescriptions')
+            ->select('file_name')
+            ->where('id', '=', $prescription_id)
+            ->get();
+
+        return view('quotation/createQuotation', ['file_names' => $file_name, 'prescription_id' => $prescription_id]);
     }
 }

@@ -320,19 +320,19 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-
                 <!-- Page Heading -->
                 <h1 class="h3 mb-4 text-gray-800">Create Quotation</h1>
                 <div class="row">
                     <div class="col-6">
                         <!-- Left side -->
-                        <img style="width: 600px;" src="{{ asset('storage/FXVrNbzRg3QvWgTiJsZjh3qKyWqsMPhJN0cr9SBN.jpg') }}" alt="gamage">
+                        @foreach($file_names as $file_name)
+                        <img style="width: 600px;" src="{{$file_name->file_name}}" alt="prescription_img">
+                        @endforeach
                     </div>
                     <div class="col">
                         <!-- Right side -->
                         <div id="table-scroll" class="table-scroll">
                             <!-- <form> -->
-
                             <table id="main-table" class="main-table">
                                 <thead>
                                     <tr>
@@ -358,7 +358,6 @@
                         <br>
                         <br>
                         <div>
-
                             <div class="form-group row">
                                 <label for="drug" class="col-sm-2 col-form-label">Drug</label>
                                 <div class="col-sm-10">
@@ -378,24 +377,18 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-10">
-                                    <button id="add" type="button" class="btn btn-primary">Add</button>
+                                <div class="col-sm-6">
+                                    <button id="add" type="button" class="btn btn-primary float-left">Add</button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button id="create_quotation" value="{{ $prescription_id }}" class="btn btn-success float-right" disabled>Create Quotation</button>
                                 </div>
                             </div>
-                            <!-- <form action="" method="post"> -->
-                            <div class="form-group row">
-                                <div class="col-sm-10">
-                                    <button id="create_quotation" class="btn btn-primary">Create Quotation</button>
-                                </div>
-                            </div>
-                            <!-- </form> -->
-                            <!-- </form> -->
                         </div>
                     </div>
                 </div>
             </div>
             <!-- /.container-fluid -->
-
         </div>
         <!-- End of Main Content -->
 
@@ -408,10 +401,8 @@
             </div>
         </footer>
         <!-- End of Footer -->
-
     </div>
     <!-- End of Content Wrapper -->
-
 </div>
 <!-- End of Page Wrapper -->
 <script type="text/javascript">
@@ -451,26 +442,17 @@
         $('#create_quotation').click(function(e) {
             e.preventDefault();
 
+            var prescription_id = $('#create_quotation').val();
             var url = "{{ route('quotation.store') }}";
             var TableData = new Array();
 
             $('#main-table').each(function(row, tr) {
                 TableData = TableData +
-                    $(tr).find('td:eq(0)').text() + $(tr).find('td:eq(1)').text() + $(tr).find('td:eq(2)').text() + $(tr).find('td:eq(3)').text();
+                    $(tr).find('td:eq(0)').text() + 
+                    $(tr).find('td:eq(1)').text() + 
+                    $(tr).find('td:eq(2)').text() + 
+                    $(tr).find('td:eq(3)').text();
             });
-
-            // $('#main-table').each(function(row, tr) {
-            //     TableData = TableData +
-            //         $(tr).find('td:eq(0)').text() + ' ' // Drug
-            //         +
-            //         $(tr).find('td:eq(1)').text() + ' ' // Unit Price
-            //         +
-            //         $(tr).find('td:eq(2)').text() + ' ' // Qty
-            //         +
-            //         $(tr).find('td:eq(3)').text() + ' '; // Amount
-            //         +
-            //         '\n';
-            // });
 
             function storeTblValues() {
                 var TableData = new Array();
@@ -485,20 +467,19 @@
                 });
                 TableData.shift(); // Removing the header row
                 TableData.pop(); // Removing the footer row
-                
+
                 return TableData;
             }
 
             TableData = storeTblValues();
-            console.log(TableData);
-            // TableData = JSON.stringify(TableData);
 
             $.ajax({
                 url: url,
                 method: 'POST',
                 dataType: 'json',
                 data: {
-                    TableData: TableData
+                    TableData: TableData,
+                    prescription_id: prescription_id,
                 },
                 success: function(response) {
                     console.log(response);

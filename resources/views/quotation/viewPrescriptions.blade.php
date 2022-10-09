@@ -360,14 +360,17 @@
                                 <tbody>
                                     @foreach($prescriptions as $prescription)
                                     <tr>
-                                        <td>{{ $prescription->id }}</td>
-                                        <td>{{ $prescription->prescription_name }}</td>
-                                        <td>{{ $prescription->date }}</td>
-                                        <td>{{ $prescription->note }}</td>
-                                        <td>{{ $prescription->address }}</td>
-                                        <td>{{ $prescription->deliveryTime }}</td>
-                                        <td><a href="" class="viewImg" target="_blank" data-toggle="modal" data-target="#prescriptionModal" data-id="{{ $prescription->id }}">View Prescription</a></td>
-                                        <td><button class="btn btn-primary mr-3">Create Quotation</button></td>
+                                        <form action="/create_quotation_view" method="get">
+                                            <td>{{ $prescription->id }}</td>
+                                            <td>{{ $prescription->prescription_name }}</td>
+                                            <td>{{ $prescription->date }}</td>
+                                            <td>{{ $prescription->note }}</td>
+                                            <td>{{ $prescription->address }}</td>
+                                            <td>{{ $prescription->deliveryTime }}</td>
+                                            <td><a href="" class="viewImg" target="_blank" data-toggle="modal" data-target="#prescriptionModal" data-id="{{ $prescription->id }}">View Prescription</a></td>
+                                            <input type="hidden" name="prescription_id" value="{{ $prescription->id }}">
+                                            <td><button type="submit" class="btn btn-primary mr-3">Create Quotation</button></td>
+                                        </form>
                                     </tr>
                                     @endforeach
                                 </tbody>

@@ -19,8 +19,8 @@ return new class extends Migration
             $table->decimal('unit_price', $precision = 8, $scale = 2);
             $table->decimal('quantity', $precision = 8, $scale = 2);
             $table->decimal('amount', $precision = 8, $scale = 2);
-            // $table->foreignId('prescription_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            // $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('prescription_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
