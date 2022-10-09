@@ -322,77 +322,111 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-4 text-gray-800">Create Quotation</h1>
-                <div class="row">
-                    <div class="col-6">
-                        <!-- Left side -->
-                        <img style="width: 600px;" src="{{ asset('storage/FXVrNbzRg3QvWgTiJsZjh3qKyWqsMPhJN0cr9SBN.jpg') }}" alt="gamage">
-                    </div>
-                    <div class="col">
-                        <!-- Right side -->
-                        <div id="table-scroll" class="table-scroll">
-                            <!-- <form> -->
+                <h1 class="h3 mb-2 text-gray-800">Prescriptions</h1>
+                <p class="mb-4">List of all prescriptions. View the prescription and start creating quotation</p>
 
-                            <table id="main-table" class="main-table">
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Prescriptions</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered prescriptionTable" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="drug">Drug</th>
-                                        <th scope="col">Unit Price</th>
-                                        <th scope="col">Qty</th>
-                                        <th scope="col">Amount</th>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Date</th>
+                                        <th>Note</th>
+                                        <th>Address</th>
+                                        <th>Delivery Time</th>
+                                        <th>View Prescription</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody id="tbody">
-
-                                </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th class="drug"></th>
-                                        <td></td>
-                                        <td>Total :</td>
-                                        <td id="amount">0.00</td>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Date</th>
+                                        <th>Note</th>
+                                        <th>Address</th>
+                                        <th>Delivery Time</th>
+                                        <th>View Prescription</th>
+                                        <th>Action</th>
                                     </tr>
                                 </tfoot>
+                                <tbody>
+                                    @foreach($prescriptions as $prescription)
+                                    <tr>
+                                        <td>{{ $prescription->id }}</td>
+                                        <td>{{ $prescription->prescription_name }}</td>
+                                        <td>{{ $prescription->date }}</td>
+                                        <td>{{ $prescription->note }}</td>
+                                        <td>{{ $prescription->address }}</td>
+                                        <td>{{ $prescription->deliveryTime }}</td>
+                                        <td><a href="" class="viewImg" target="_blank" data-toggle="modal" data-target="#prescriptionModal" data-id="{{ $prescription->id }}">View Prescription</a></td>
+                                        <td><button class="btn btn-primary mr-3">Create Quotation</button></td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
                         </div>
-                        <br>
-                        <br>
-                        <div>
+                    </div>
+                    <!-- The Modal for prescription -->
+                    <div class="modal fade" id="prescriptionModal">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
 
-                            <div class="form-group row">
-                                <label for="drug" class="col-sm-2 col-form-label">Drug</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="drug" name="drug" placeholder="Enter the drug">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 id="modal-title" class="modal-title"></h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="unit_price" class="col-sm-2 col-form-label">Unit Price</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="unit_price" name="unit_price" placeholder="Enter unit price">
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <img id="imgPres" style="display: block; margin-left: auto; margin-right: auto;" src="" alt="prescription">
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="quantity" class="col-sm-2 col-form-label">Quantity</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter quantity">
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 </div>
+
                             </div>
-                            <div class="form-group row">
-                                <div class="col-sm-10">
-                                    <button id="add" type="button" class="btn btn-primary">Add</button>
-                                </div>
-                            </div>
-                            <!-- <form action="" method="post"> -->
-                            <div class="form-group row">
-                                <div class="col-sm-10">
-                                    <button id="create_quotation" class="btn btn-primary">Create Quotation</button>
-                                </div>
-                            </div>
-                            <!-- </form> -->
-                            <!-- </form> -->
                         </div>
                     </div>
+                    <!-- End of modal for prescription -->
+
+                    <!-- The Modal for quotation -->
+                    <div class="modal fade" id="quotationModal">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Modal Heading</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    Modal body..
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of modal for quotation -->
                 </div>
+
             </div>
             <!-- /.container-fluid -->
 
@@ -403,7 +437,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2021</span>
+                    <span>Copyright &copy; Lusitha Ranathunga 2022</span>
                 </div>
             </div>
         </footer>
@@ -414,97 +448,37 @@
 
 </div>
 <!-- End of Page Wrapper -->
-<script type="text/javascript">
-    var rowId = 0;
-    var total = 0;
+@endsection
+<!-- Script -->
+<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 
+<script type='text/javascript'>
     $(document).ready(function() {
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        // Adding rows to the table dynamically
-        $("#add").click(function() {
-            var drug = $('#drug').val();
-            var unit_price = $('#unit_price').val();
-            var quantity = $('#quantity').val();
-
-            var amount = 0;
-
-            amount = unit_price * quantity;
-            $('#amount').val(amount);
-            total = total + amount;
-
-            $('#tbody').append(`<tr id="R${++rowId}">
-                    <td>${drug}</td>
-                    <td>${unit_price}</td>
-                    <td>${quantity}</td>
-                    <td>${amount}</td>
-                    </tr>`);
-
-            $('#amount').html(`${total}`);
-        });
-
-        // Getting the text of tds
-        $('#create_quotation').click(function(e) {
+        $('.prescriptionTable').on('click', '.viewImg', function(e) {
             e.preventDefault();
 
-            var url = "{{ route('quotation.store') }}";
-            var TableData = new Array();
+            var prescriptionID = $(this).attr('data-id');
 
-            $('#main-table').each(function(row, tr) {
-                TableData = TableData +
-                    $(tr).find('td:eq(0)').text() + $(tr).find('td:eq(1)').text() + $(tr).find('td:eq(2)').text() + $(tr).find('td:eq(3)').text();
-            });
+            if (prescriptionID > 0) {
 
-            // $('#main-table').each(function(row, tr) {
-            //     TableData = TableData +
-            //         $(tr).find('td:eq(0)').text() + ' ' // Drug
-            //         +
-            //         $(tr).find('td:eq(1)').text() + ' ' // Unit Price
-            //         +
-            //         $(tr).find('td:eq(2)').text() + ' ' // Qty
-            //         +
-            //         $(tr).find('td:eq(3)').text() + ' '; // Amount
-            //         +
-            //         '\n';
-            // });
+                // AJAX request
+                var url = "{{ route('prescription.show',[':prescriptionID']) }}";
+                url = url.replace(':prescriptionID', prescriptionID);
 
-            function storeTblValues() {
-                var TableData = new Array();
+                $.ajax({
+                    url: url,
+                    dataType: 'json',
+                    success: function(response) {
+                        //Change the title of the modal header
+                        $('#modal-title').text(response.prescription_name[0].prescription_name);
 
-                $('#main-table tr').each(function(row, tr) {
-                    TableData[row] = {
-                        "drug": $(tr).find('td:eq(0)').text(),
-                        "unit_price": $(tr).find('td:eq(1)').text(),
-                        "quantity": $(tr).find('td:eq(2)').text(),
-                        "amount": $(tr).find('td:eq(3)').text()
+                        //Change the prescription image
+                        $('#imgPres').attr("src", response.prescription_img[0].file_name);
                     }
                 });
-                TableData.shift(); // Removing the header row
-                TableData.pop(); // Removing the footer row
-                
-                return TableData;
             }
-
-            TableData = storeTblValues();
-            console.log(TableData);
-            // TableData = JSON.stringify(TableData);
-
-            $.ajax({
-                url: url,
-                method: 'POST',
-                dataType: 'json',
-                data: {
-                    TableData: TableData
-                },
-                success: function(response) {
-                    console.log(response);
-                }
-            });
         });
+
     });
 </script>
-@endsection

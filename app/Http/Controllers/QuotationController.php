@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class QuotationController extends Controller
 {
@@ -36,7 +37,33 @@ class QuotationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $i = 0;
+        $user_id = $request->user()->id;
+        foreach ($request['TableData'] as $result) {
+            $drug[] = $result['drug'];
+            $unit_price[] = $result['unit_price'];
+            $quantity[] = $result['quantity'];
+            $amount[] = $result['amount'];
+
+            $i++;
+        }
+
+        for ($j = 0; $j < $i; $j++) {
+            DB::table('quotations')->insert([
+                'drug_name' => $drug[$j],
+                'unit_price' => $unit_price[$j],
+                'quantity' => $quantity[$j],
+                'amount' => $amount[$j],
+                // 'prescription_id' => 1,
+                'user_id' => $user_id,
+                'created_at' => \Carbon\Carbon::now(),
+            ]);
+        }
+
+        return response()->json([
+            'Sucess' => true,
+            'data' => $i
+        ]);
     }
 
     /**
@@ -82,5 +109,27 @@ class QuotationController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * View list of prescriptions.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function view_prescriptions()
+    {
+        $prescriptions = DB::table('prescriptions')
+            ->select('id', 'prescription_name', 'file_name', 'date', 'note', 'address', 'deliveryTime')
+            // ->where('prescriptions.user_id', '=', $current_user_id)
+            ->get();
+
+        // foreach ($prescriptions as $prescription) {
+        //     $id = $prescription->id;
+        //     $prescription_name = $prescription->prescription_name;
+        //     $file_name = $prescription->file_name;
+        //     $date = $prescription->date;
+        // }
+
+        return view('quotation.viewPrescriptions', ['prescriptions' => $prescriptions]);
     }
 }

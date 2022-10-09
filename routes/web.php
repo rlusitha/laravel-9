@@ -26,3 +26,5 @@ Route::view('/welcome1', 'welcome1');
 Route::view('/getQuotation', 'quotation');
 Route::resource('prescription', PrescriptionController::class);
 Route::resource('quotation', QuotationController::class);
+
+Route::get('view_prescriptions', [QuotationController::class, 'view_prescriptions']);
