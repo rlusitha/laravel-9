@@ -16,3 +16,6 @@ yarn-error.log
 /.idea
 /.vscode
 vite.config.js
+/resources/views/vendor
+/docker
+/resources/views/errors

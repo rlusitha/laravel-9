@@ -27,5 +27,6 @@ Route::view('/getQuotation', 'quotation');
 Route::resource('prescription', PrescriptionController::class);
 Route::resource('quotation', QuotationController::class);
 
-Route::get('view_prescriptions', [QuotationController::class, 'view_prescriptions']);
+Route::get('view_prescriptions', [QuotationController::class, 'view_prescriptions'])->name('view_prescriptions');
 Route::get('create_quotation_view', [QuotationController::class, 'create_quotation_view']);
+Route::get('pdf', [QuotationController::class, 'quotation_pdf_generator'])->name('pdf');

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
 class QuotationController extends Controller
@@ -14,7 +16,11 @@ class QuotationController extends Controller
      */
     public function index()
     {
-        //
+        $prescriptions = DB::table('prescriptions')
+            ->select('id', 'file_name', 'prescription_name', 'date')
+            ->get();
+
+        return view('quotation.viewQuotations', ['prescriptions' => $prescriptions]);
     }
 
     /**
@@ -63,8 +69,7 @@ class QuotationController extends Controller
         }
 
         return response()->json([
-            'Sucess' => true,
-            'data' => $i
+            'Sucess' => true
         ]);
     }
 
@@ -137,5 +142,25 @@ class QuotationController extends Controller
             ->get();
 
         return view('quotation/createQuotation', ['file_names' => $file_name, 'prescription_id' => $prescription_id]);
+    }
+
+    public function quotation_pdf_generator(Request $request)
+    {
+        $total = 0;
+
+        $quotation_data = DB::table('quotations')
+            ->select('drug_name', 'unit_price', 'quantity', 'amount', 'prescription_id')
+            // ->where('id', '=', $prescription_id)
+            ->get();
+
+        foreach($quotation_data as $data) {
+            $amount = $data->amount;
+            $total = $total + $amount;
+        }
+
+        $total = number_format($total, 2);
+
+        $pdf = Pdf::loadView('quotation.pdfQuotation', ['quotation_data' => $quotation_data, 'total_price' => $total]);
+        return $pdf->stream();
     }
 }
