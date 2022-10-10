@@ -359,19 +359,19 @@
                         <br>
                         <div>
                             <div class="form-group row">
-                                <label for="drug" class="col-sm-2 col-form-label">Drug</label>
+                                <label for="drug" class="col-sm-2 col-form-label">Drug :</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="drug" name="drug" placeholder="Enter the drug">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="unit_price" class="col-sm-2 col-form-label">Unit Price</label>
+                                <label for="unit_price" class="col-sm-2 col-form-label">Unit Price :</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="unit_price" name="unit_price" placeholder="Enter unit price">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="quantity" class="col-sm-2 col-form-label">Quantity</label>
+                                <label for="quantity" class="col-sm-2 col-form-label">Quantity :</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter quantity">
                                 </div>
@@ -408,6 +408,7 @@
 <script type="text/javascript">
     var rowId = 0;
     var total = 0;
+    var table_row_count = 0;
 
     $(document).ready(function() {
 
@@ -416,6 +417,12 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        //Disabling the Create Quotation button, when the page loads for the first time
+        if(table_row_count == 0) {
+            $('#create_quotation').attr('disabled', true);
+        }
+
         // Adding rows to the table dynamically
         $("#add").click(function() {
             var drug = $('#drug').val();
@@ -436,6 +443,13 @@
                     </tr>`);
 
             $('#amount').html(`${total}`);
+
+            table_row_count++;
+
+            // Enabling the Create Quotation button
+            if(table_row_count > 0) {
+                $('#create_quotation').attr('disabled', false);
+            }
         });
 
         // Getting the text of tds
