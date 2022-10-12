@@ -11,7 +11,6 @@ class QuotationController extends Controller
 {
     public function __construct()
     {
-        
     }
     /**
      * Display a listing of the resource.
@@ -23,7 +22,7 @@ class QuotationController extends Controller
         $prescriptions = DB::table('prescriptions')
             ->select('id', 'file_name', 'prescription_name', 'date')
             ->get();
-
+            
         return view('quotation.viewQuotations', ['prescriptions' => $prescriptions]);
     }
 
@@ -148,23 +147,37 @@ class QuotationController extends Controller
         return view('quotation/createQuotation', ['file_names' => $file_name, 'prescription_id' => $prescription_id]);
     }
 
-    public function quotation_pdf_generator(Request $request)
+    public function quotation_pdf_generator($id)
     {
+        $prescription_id = $id;
         $total = 0;
 
         $quotation_data = DB::table('quotations')
             ->select('drug_name', 'unit_price', 'quantity', 'amount', 'prescription_id')
-            // ->where('id', '=', $prescription_id)
+            ->where('prescription_id', '=', $prescription_id)
             ->get();
 
-        foreach($quotation_data as $data) {
+        foreach ($quotation_data as $data) {
             $amount = $data->amount;
             $total = $total + $amount;
         }
 
         $total = number_format($total, 2);
 
+        $file_names = DB::table('prescriptions')
+            ->select('file_name')
+            ->join('quotations', 'prescriptions.id', '=', 'quotations.prescription_id')
+            ->where('prescriptions.id', '=', $prescription_id)
+            ->get();
+
+        foreach ($file_names as $file_name) {
+            $prescription_file_name = $file_name->file_name;
+        }
+
+        //Removing the extension of the file name
+        $prescription_file_name = substr($prescription_file_name, 0, -4);
+
         $pdf = Pdf::loadView('quotation.pdfQuotation', ['quotation_data' => $quotation_data, 'total_price' => $total]);
-        return $pdf->stream();
+        return $pdf->stream($prescription_file_name . '.pdf');
     }
 }

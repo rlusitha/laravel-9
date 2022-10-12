@@ -29,7 +29,7 @@ Route::resource('quotation', QuotationController::class)->middleware(['auth', 'a
 
 Route::get('view_prescriptions', [QuotationController::class, 'view_prescriptions'])->name('view_prescriptions')->middleware(['auth', 'admin']);
 Route::get('create_quotation_view', [QuotationController::class, 'create_quotation_view'])->middleware('auth');
-Route::get('pdf', [QuotationController::class, 'quotation_pdf_generator'])->name('pdf')->middleware('auth');
+Route::get('pdf/{id}', [QuotationController::class, 'quotation_pdf_generator'])->name('pdf')->middleware('auth');
 
 Route::get('send_email', function() {
     $mailData = [

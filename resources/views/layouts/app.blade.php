@@ -68,7 +68,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('prescription.index') }}">
+                <a id="view_my_prescriptions" class="nav-link collapsed" href="{{ route('prescription.index') }}">
                     <i class="fa fa-sticky-note" aria-hidden="true"></i>
                     <span>View My Prescriptions</span>
                 </a>
@@ -82,6 +82,7 @@
                 </a>
             </li>
 
+            @if(Auth::user()->role == 'admin')
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -100,12 +101,13 @@
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('quotation.index') }}">
+                <a id="view_quotations" class="nav-link collapsed" href="{{ route('quotation.index') }}">
                     <i class="fa fa-eye" aria-hidden="true"></i>
                     <span>View Quoations</span>
                 </a>
             </li>
-
+            @endif
+            
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -139,7 +141,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="{{asset('img/undraw_profile.svg')}}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

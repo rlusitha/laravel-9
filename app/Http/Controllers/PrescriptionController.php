@@ -24,10 +24,18 @@ class PrescriptionController extends Controller
     {
         $current_user_id = Auth::id();
 
-        $prescriptions = DB::table('prescriptions') 
-            ->select('id', 'path', 'file_name', 'prescription_name', 'date', 'user_id')
-            ->where('prescriptions.user_id', '=', $current_user_id)
-            ->get();
+        $role = Auth::user()->role;
+
+        if ($role == 'admin') {
+            $prescriptions = DB::table('prescriptions')
+                ->select('id', 'path', 'file_name', 'prescription_name', 'date', 'user_id')
+                ->get();
+        } else {
+            $prescriptions = DB::table('prescriptions')
+                ->select('id', 'path', 'file_name', 'prescription_name', 'date', 'user_id')
+                ->where('prescriptions.user_id', '=', $current_user_id)
+                ->get();
+        }
 
         foreach ($prescriptions as $prescription) {
             $file_name = $prescription->file_name;
@@ -102,20 +110,34 @@ class PrescriptionController extends Controller
     public function show($id)
     {
         $current_user_id = Auth::id();
+        $role = Auth::user()->role;
 
-        $prescription_img = DB::table('prescriptions') 
-        ->select('file_name')
-        ->where('prescriptions.id', '=', $id)
-        ->where('prescriptions.user_id', '=', $current_user_id)
-        ->get();
+        if ($role == 'admin') {
+            $prescription_img = DB::table('prescriptions')
+                ->select('file_name')
+                ->where('prescriptions.id', '=', $id)
+                ->get();
+        } else {
+            $prescription_img = DB::table('prescriptions')
+                ->select('file_name')
+                ->where('prescriptions.id', '=', $id)
+                ->where('prescriptions.user_id', '=', $current_user_id)
+                ->get();
+        }
 
-        $prescription_name = DB::table('prescriptions') 
-        ->select('prescription_name')
-        ->where('prescriptions.id', '=', $id)
-        ->where('prescriptions.user_id', '=', $current_user_id)
-        ->get();
+        if ($role == 'admin') {
+            $prescription_name = DB::table('prescriptions')
+                ->select('prescription_name')
+                ->where('prescriptions.id', '=', $id)
+                ->get();
+        } else {
+            $prescription_name = DB::table('prescriptions')
+                ->select('prescription_name')
+                ->where('prescriptions.id', '=', $id)
+                ->where('prescriptions.user_id', '=', $current_user_id)
+                ->get();
+        }
 
-        // return view('prescription.viewPrescriptions', ['prescription_img' => $prescription_img, 'prescription_name' => $prescription_name]);
         return response()->json([
             'prescription_img' => $prescription_img,
             'prescription_name' => $prescription_name,
