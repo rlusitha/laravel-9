@@ -19,3 +19,4 @@ vite.config.js
 /resources/views/vendor
 /docker
 /resources/views/errors
+sail
