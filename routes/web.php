@@ -24,14 +24,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::view('/welcome1', 'welcome1');
-Route::view('/getQuotation', 'quotation');
 Route::resource('prescription', PrescriptionController::class)->middleware('auth');
-Route::resource('quotation', QuotationController::class);
+Route::resource('quotation', QuotationController::class)->middleware(['auth', 'admin']);
 
-Route::get('view_prescriptions', [QuotationController::class, 'view_prescriptions'])->name('view_prescriptions');
-Route::get('create_quotation_view', [QuotationController::class, 'create_quotation_view']);
-Route::get('pdf', [QuotationController::class, 'quotation_pdf_generator'])->name('pdf');
+Route::get('view_prescriptions', [QuotationController::class, 'view_prescriptions'])->name('view_prescriptions')->middleware(['auth', 'admin']);
+Route::get('create_quotation_view', [QuotationController::class, 'create_quotation_view'])->middleware('auth');
+Route::get('pdf', [QuotationController::class, 'quotation_pdf_generator'])->name('pdf')->middleware('auth');
 
 Route::get('send_email', function() {
     $mailData = [
@@ -41,4 +39,4 @@ Route::get('send_email', function() {
 
     Mail::to("rlusitha@gmail.com")->send(new QuotationEmail($mailData));
     dd('Mail Sent!');
-});
+})->middleware('auth');
