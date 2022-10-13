@@ -20,9 +20,9 @@ class QuotationController extends Controller
     public function index()
     {
         $prescriptions = DB::table('prescriptions')
-            ->select('id', 'file_name', 'prescription_name', 'date')
+            ->select('id', 'file_name', 'prescription_name', 'date', 'quotation_status')
             ->get();
-            
+
         return view('quotation.viewQuotations', ['prescriptions' => $prescriptions]);
     }
 
@@ -71,6 +71,10 @@ class QuotationController extends Controller
             ]);
         }
 
+        DB::table('prescriptions')
+            ->where('id', '=', $prescription_id)
+            ->update(['quotation_status' => 'created']);
+
         return response()->json([
             'Sucess' => true
         ]);
@@ -88,14 +92,21 @@ class QuotationController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     *
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+
+        DB::table('prescriptions')
+            ->where('id', '=', $id)
+            ->update(['quotation_status' => 'sent']);
+
+        return response()->json([
+            'Sucess' => true
+        ]);
     }
 
     /**
@@ -107,7 +118,6 @@ class QuotationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
@@ -129,7 +139,7 @@ class QuotationController extends Controller
     public function view_prescriptions()
     {
         $prescriptions = DB::table('prescriptions')
-            ->select('id', 'prescription_name', 'file_name', 'date', 'note', 'address', 'deliveryTime')
+            ->select('id', 'prescription_name', 'file_name', 'date', 'note', 'address', 'deliveryTime', 'quotation_status')
             ->get();
 
         return view('quotation.viewPrescriptions', ['prescriptions' => $prescriptions]);

@@ -13,7 +13,6 @@ class PrescriptionController extends Controller
 {
     public function __construct()
     {
-        
     }
     /**
      * Display a listing of the resource.
@@ -28,11 +27,11 @@ class PrescriptionController extends Controller
 
         if ($role == 'admin') {
             $prescriptions = DB::table('prescriptions')
-                ->select('id', 'path', 'file_name', 'prescription_name', 'date', 'user_id')
+                ->select('id', 'path', 'file_name', 'prescription_name', 'date', 'user_id', 'quotation_status')
                 ->get();
         } else {
             $prescriptions = DB::table('prescriptions')
-                ->select('id', 'path', 'file_name', 'prescription_name', 'date', 'user_id')
+                ->select('id', 'path', 'file_name', 'prescription_name', 'date', 'user_id', 'quotation_status')
                 ->where('prescriptions.user_id', '=', $current_user_id)
                 ->get();
         }
@@ -164,7 +163,25 @@ class PrescriptionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $status = $request->status;
+
+        if ($status == 'accepted') {
+            DB::table('prescriptions')
+                ->where('id', '=', $id)
+                ->update(['quotation_status' => 'accepted']);
+
+            return response()->json([
+                'Sucess' => true
+            ]);
+        } else {
+            DB::table('prescriptions')
+                ->where('id', '=', $id)
+                ->update(['quotation_status' => 'rejected']);
+
+            return response()->json([
+                'Sucess' => true
+            ]);
+        }
     }
 
     /**
