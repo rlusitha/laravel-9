@@ -42,13 +42,13 @@
                             <td>{{ $prescription->prescription_name }}</td>
                             <td>{{ $prescription->date }}</td>
                             <td><a href="" class="viewImg" target="_blank" data-toggle="modal" data-target="#prescriptionModal" data-id="{{ $prescription->id }}">View Prescription</a></td>
-                            @if($prescription->quotation_status == 'created' || $prescription->quotation_status == 'sent' || $prescription->quotation_status == 'accepted' || $prescription->quotation_status == 'rejected')
+                            @if($prescription->quotation_status == 'sent' || $prescription->quotation_status == 'accepted' || $prescription->quotation_status == 'rejected')
                             <td><a href="/pdf/{{$prescription->id}}" target="_blank">View Quotation</a></td>
                             @else
                             <td style="color: red;">PENDING</td>
                             @endif
-                            @if($prescription->quotation_status == 'created' || $prescription->quotation_status == 'sent')
-                            <td><button id="accept" value="{{$prescription->id}}" class="btn btn-success mr-3">Accept</button><button id="reject" value="{{$prescription->id}}" class="btn btn-danger">Reject</button></td>
+                            @if($prescription->quotation_status == 'sent')
+                            <td><button id="accept" value="{{$prescription->id}}" class="btn btn-success mr-3 accept">Accept</button><button id="reject" value="{{$prescription->id}}" class="btn btn-danger reject">Reject</button></td>
                             @elseif($prescription->quotation_status == 'accepted')
                             <td style="color: green; text-align: center;"><b>ACCEPTED</b></td>
                             @elseif($prescription->quotation_status == 'rejected')
@@ -126,8 +126,9 @@
             }
         });
 
-        $('#accept').click(function() {
-            var prescription_id = $('#accept').val();
+        $('.accept').click(function() {
+
+            var prescription_id = $(this).closest('button').prop('value');
             var status = 'accepted';
 
             $.ajax({
@@ -144,8 +145,8 @@
             });
         });
 
-        $('#reject').click(function() {
-            var prescription_id = $('#reject').val();
+        $('.reject').click(function() {
+            var prescription_id = $(this).closest('button').prop('value');
             var status = 'rejected';
 
             $.ajax({

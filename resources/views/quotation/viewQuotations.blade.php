@@ -48,7 +48,7 @@
                             <td style="color: red;">PENDING</td>
                             @endif
                             @if($prescription->quotation_status == 'created')
-                            <td><button id="send_button" value="{{$prescription->id}}" class="btn btn-success">Send Quotation</button></td>
+                            <td><button id="send_button" value="{{$prescription->id}}" class="btn btn-success send_button">Send Quotation</button></td>
                             @elseif($prescription->quotation_status == 'sent')
                             <td style="color: brown; text-align: center;"><b>SENT</b></td>
                             @elseif($prescription->quotation_status == 'accepted')
@@ -56,7 +56,7 @@
                             @elseif($prescription->quotation_status == 'rejected')
                             <td style="color: red; text-align: center;"><b>REJECTED</b></td>
                             @else
-                            <td><button id="send_button" value="{{$prescription->id}}" class="btn btn-success" disabled>Send Quotation</button></td>
+                            <td><button id="send_button" value="{{$prescription->id}}" class="btn btn-success send_button" disabled>Send Quotation</button></td>
                             @endif
                         </tr>
                         @endforeach
@@ -123,8 +123,8 @@
             }
         });
 
-        $('#send_button').click(function() {
-            var prescription_id = $('#send_button').val();
+        $('.send_button').click(function() {
+            var prescription_id = $(this).closest('button').prop('value');
 
             $.ajax({
                 url: `quotation/${prescription_id}/edit`,
