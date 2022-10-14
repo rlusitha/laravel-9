@@ -98,6 +98,8 @@ class PrescriptionController extends Controller
                 'created_at' => \Carbon\Carbon::now(),
             ]);
         }
+
+        return redirect(route('prescription.index'));
     }
 
     /**
