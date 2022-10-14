@@ -6,6 +6,8 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\QuotationEmail;
 
 class QuotationController extends Controller
 {
@@ -189,5 +191,26 @@ class QuotationController extends Controller
 
         $pdf = Pdf::loadView('quotation.pdfQuotation', ['quotation_data' => $quotation_data, 'total_price' => $total]);
         return $pdf->stream($prescription_file_name . '.pdf');
+    }
+
+    public function send_mail(Request $request)
+    {
+        $prescription_id = $request->prescription_id;
+
+        $names = DB::table('users')
+        ->join('prescriptions', 'users.id', '=', 'prescriptions.user_id')
+        ->where('prescriptions.id', '=', $prescription_id)
+        ->select('name')
+        ->get();
+
+        foreach($names as $name) {
+            $name = $name->name;
+        }
+
+        $mailData = [
+            'name' => $name,
+        ];
+
+        Mail::to("rlusitha@gmail.com")->send(new QuotationEmail($mailData));
     }
 }

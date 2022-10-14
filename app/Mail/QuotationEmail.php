@@ -30,7 +30,6 @@ class QuotationEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('email.quotationEmail')
-        ->attach(public_path('quotation.pdf'));
+        return $this->view('email.quotationEmail');
     }
 }

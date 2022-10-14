@@ -2,8 +2,6 @@
 
 use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\QuotationController;
-use App\Mail\QuotationEmail;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,12 +29,4 @@ Route::get('view_prescriptions', [QuotationController::class, 'view_prescription
 Route::get('create_quotation_view', [QuotationController::class, 'create_quotation_view'])->middleware('auth');
 Route::get('pdf/{id}', [QuotationController::class, 'quotation_pdf_generator'])->name('pdf')->middleware('auth');
 
-Route::get('send_email', function() {
-    $mailData = [
-        'name' => 'Lusitha',
-        'dob' => '20/12/1988'
-    ];
-
-    Mail::to("rlusitha@gmail.com")->send(new QuotationEmail($mailData));
-    dd('Mail Sent!');
-})->middleware('auth');
+Route::get('send_email', [QuotationController::class, 'send_mail'])->name('send_email')->middleware(['auth', 'admin']);

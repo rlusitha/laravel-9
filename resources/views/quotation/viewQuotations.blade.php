@@ -50,7 +50,7 @@
                             @if($prescription->quotation_status == 'created')
                             <td><button id="send_button" value="{{$prescription->id}}" class="btn btn-success">Send Quotation</button></td>
                             @elseif($prescription->quotation_status == 'sent')
-                            <td style="color: yellow; text-align: center;"><b>SENT</b></td>
+                            <td style="color: brown; text-align: center;"><b>SENT</b></td>
                             @elseif($prescription->quotation_status == 'accepted')
                             <td style="color: green; text-align: center;"><b>ACCEPTED</b></td>
                             @elseif($prescription->quotation_status == 'rejected')
@@ -129,13 +129,22 @@
             $.ajax({
                 url: `quotation/${prescription_id}/edit`,
                 success: function(response) {
-                    if(response) {
+                    if (response) {
                         location.reload();
                     }
                 }
             });
-        });
 
+            $.ajax({
+                url: "{{route('send_email')}}",
+                data: {
+                    prescription_id: prescription_id,
+                },
+                success: function(response) {
+                    location.reload();
+                }
+            });
+        });
     });
 </script>
 @endsection

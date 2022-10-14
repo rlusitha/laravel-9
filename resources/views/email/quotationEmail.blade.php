@@ -7,8 +7,13 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Test Email</h1>
-    <p>Name: {{ $mailData['name'] }}</p>
-    <p>DOB: {{ $mailData['dob'] }}</p>
+    <h1>Quotation for Prescription</h1>
+    <p>Dear {{ $mailData['name'] }},</p>
+    <br>
+    <p>The quotation for your prescription has been sent to your account. Please check</p>
+    <br>
+    <p>Thanks & Regards</p>
+    <p>Xiteb Pharmacy</p>
+
 </body>
 </html>
